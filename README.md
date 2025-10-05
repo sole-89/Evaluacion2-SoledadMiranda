@@ -1,5 +1,12 @@
 # Evaluación Sumativa N°2 - Programación Orientada a Objetos Seguro
 
+## Informacion del estudiante##
+
+-* Nombre: Soledad Miranda
+-* Seccion: 114-2B-F1
+-* Sede: Puente Alto 
+-* Carrera: Analista Programador 
+-* Docente: Michael Alexis Arjel  
 Este repositorio contiene el desarrollo de los ejercicios 1 al 5 de la evaluación sumativa del módulo Programación Orientada a Objetos en Python.
 
 ## Estructura del proyecto
