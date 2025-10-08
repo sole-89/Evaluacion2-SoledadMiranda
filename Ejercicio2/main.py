@@ -1,36 +1,59 @@
 from clases.libro import Libro
 from clases.publicacion import Publicacion
 
-# Crear publicación válida
-publicacion = Publicacion(id_publicacion=1, titulo="Don Quijote", anio=1605)
+print("\n📚 === INICIO DE PRUEBAS: CLASES LIBRO Y PUBLICACIÓN ===")
 
-# Intentar crear publicación con año inválido
+# === CREAR PUBLICACIÓN VÁLIDA ===
+publicacion = Publicacion(id_publicacion=1, titulo="Don Quijote", anio=1605)
+print("✅ Publicación creada correctamente:", publicacion.titulo)
+
+# === INTENTAR CREAR PUBLICACIÓN CON AÑO INVÁLIDO ===
 try:
     Publicacion(id_publicacion=2, titulo="Antiguo", anio=1400)
 except ValueError as e:
-    print("Error esperado:", e)
+    print("⚠️  Error esperado:", e)
 
-# Crear libro
+# === CREAR LIBRO ===
 libro = Libro(id_publicacion=3, titulo="Cien años de soledad", anio=1967, paginas_totales=500)
+print("📖 Libro creado:", libro.titulo)
 
-# Leer páginas válidas
+# === LEER PÁGINAS VÁLIDAS ===
 libro.leer(120)
-print("Progreso:", libro.consultar_progreso(), "%")
+print(f"📘 Progreso actual: {libro.consultar_progreso()} %")
 
-# Intentar leer más páginas de las que quedan
+# === INTENTAR LEER DEMASIADO ===
 try:
     libro.leer(400)
 except ValueError as e:
-    print("Error esperado:", e)
+    print("⚠️  Error esperado:", e)
 
-# Actualizar año
+# === ACTUALIZAR AÑO ===
 libro.actualizar_anio(1980)
+print("🕒 Año actualizado correctamente a 1980")
 
-# Mostrar historial de eventos
-print("\nHistorial de publicación:")
+# === MOSTRAR HISTORIAL DE EVENTOS ===
+print("\n" + "=" * 70)
+print("📋 HISTORIAL DE PUBLICACIÓN")
+print("=" * 70)
+print(f"{'Fecha':<20} | {'Tipo':<20} | {'Detalle'}")
+print("-" * 70)
 for evento in libro.historial_eventos:
-    print(evento)
+    fecha = evento['fecha'].strftime("%Y-%m-%d %H:%M:%S")
+    tipo = evento.get('tipo', '')
+    detalle = evento.get('detalle', '')
+    print(f"{fecha:<20} | {tipo:<20} | {detalle}")
 
-print("\nEventos de lectura:")
+# === MOSTRAR EVENTOS DE LECTURA ===
+print("\n" + "=" * 100)
+print("📖 EVENTOS DE LECTURA")
+print("=" * 100)
+print(f"{'Fecha':<20} | {'Páginas Leídas':<15} | {'Progreso (%)':<15} | {'Páginas Restantes':<20}")
+print("-" * 100)
 for evento in libro.eventos_lectura:
-    print(evento)
+    fecha = evento['fecha'].strftime("%Y-%m-%d %H:%M:%S")
+    paginas = evento.get('paginas_leidas', '-')
+    progreso = evento.get('progreso', '-')
+    restantes = evento.get('paginas_restantes', '-')
+    print(f"{fecha:<20} | {paginas:<15} | {progreso:<15} | {restantes:<20}")
+
+print("\n✅ Prueba completada exitosamente.")

@@ -28,11 +28,22 @@ parcela.activar("Inicio nueva temporada")
 parcela.cargar_agua(3000)
 parcela.regar_automatico("parcial")
 
-# Mostrar historial
-print("Historial de eventos:")
+# === Sección mejorada de visualización ===
+print("\n=== HISTORIAL DE EVENTOS ===")
 for evento in parcela.historial_eventos:
-    print(evento)
+    fecha = evento['fecha'].strftime("%Y-%m-%d %H:%M:%S")
+    tipo = evento.get('tipo', '')
+    detalle = evento.get('detalle', '')
+    print(f"{fecha:<20} | {tipo:<20} | {detalle}")
 
-print("\nEventos de riego:")
+print("\n=== EVENTOS DE RIEGO ===")
 for evento in parcela.eventos_riego:
-    print(evento)
+    fecha = evento['fecha'].strftime("%Y-%m-%d %H:%M:%S")
+    modo = evento.get('modo', evento.get('tipo', ''))
+    litros_solicitados = evento.get('litros_solicitados', '-')
+    litros_aplicados = evento.get('litros_aplicados', '-')
+    saldo_antes = evento.get('saldo_antes', '-')
+    saldo_despues = evento.get('saldo_despues', '-')
+    print(f"{fecha:<20} | {modo:<10} | Solicitados: {litros_solicitados:<8} | "
+          f"Aplicados: {litros_aplicados:<8} | Saldo antes: {saldo_antes:<8} | "
+          f"Saldo después: {saldo_despues:<8}")
